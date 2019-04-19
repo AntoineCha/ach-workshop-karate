@@ -1,0 +1,30 @@
+{
+  "articles":
+   [
+    {
+      "ean": "9780321601919",
+      "label": "Continuous Delivery",
+      "description": "Reliable Software Releases through Build, Test, and Deployment Automation"
+    },
+    {
+      "ean": "9781491950358",
+      "label": "Building Microservices",
+      "description": "Distributed systems have become more fine-grained in the past 10 years, shifting from code-heavy monolithic applications to smaller, self-contained microservices"
+    },
+    {
+      "ean": "9781449373320",
+      "label": "Designing Data–Intensive Applications",
+      "description": "Data is at the center of many challenges in system design today. Difficult issues need to be figured out, such as scalability, consistency, reliability, efficiency, and maintainability."
+    },
+    {
+      "ean": "9780134494166",
+      "label": "Clean Architecture",
+      "description": "A Craftsman's Guide to Software Structure and Design"
+    },
+    {
+      "ean": "9780321125215",
+      "label": "Domain-Driven Design",
+      "description": "Tackling Complexity in the Heart of Software"
+    }
+  ]
+}
