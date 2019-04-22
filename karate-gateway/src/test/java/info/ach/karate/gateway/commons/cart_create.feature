@@ -5,5 +5,6 @@ Feature: create a cart
     And header Content-Type = 'application/json'
     And request {}
     When method post
+    * print response
     * def id = response.result.uuid
 

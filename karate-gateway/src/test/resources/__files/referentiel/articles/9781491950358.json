@@ -1,0 +1,9 @@
+{
+  "result": {
+    "ean": "9781491950358",
+    "label": "Building Microservices",
+    "description": "Distributed systems have become more fine-grained in the past 10 years, shifting from code-heavy monolithic applications to smaller, self-contained microservices"
+  },
+  "code": null,
+  "detail": null
+}

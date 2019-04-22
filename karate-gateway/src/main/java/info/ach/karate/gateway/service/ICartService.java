@@ -8,7 +8,7 @@ public interface ICartService {
 
     Cart get(String cartUuid);
 
-    Cart addArticle(String cartUuid, String ean);
+    Cart addArticle(String cartUuid, String ean) throws Exception;
 
     Cart addCustomer(String cartUuid, String uuid);
 }

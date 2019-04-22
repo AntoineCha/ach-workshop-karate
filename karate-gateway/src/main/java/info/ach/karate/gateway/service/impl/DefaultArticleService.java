@@ -1,6 +1,8 @@
 package info.ach.karate.gateway.service.impl;
 
 import info.ach.karate.gateway.dto.JsonResponseDto;
+import info.ach.karate.gateway.exception.NotFoundException;
+import info.ach.karate.gateway.exception.TimeoutException;
 import info.ach.karate.gateway.model.Article;
 import info.ach.karate.gateway.service.IArticleService;
 import org.slf4j.Logger;
@@ -10,7 +12,11 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
+
+import java.net.SocketTimeoutException;
 
 @Service
 public class DefaultArticleService implements IArticleService {
@@ -30,7 +36,7 @@ public class DefaultArticleService implements IArticleService {
     }
 
     @Override
-    public Article getArticle(String ean) {
+    public Article getArticle(String ean) throws Exception {
 
         StringBuilder urlBuilder = new StringBuilder();
         urlBuilder.append(apiReferentielUrl);
@@ -42,9 +48,18 @@ public class DefaultArticleService implements IArticleService {
             }).getBody();
 
             return wrapper.getResult();
-        } catch (Exception e) {
+        } catch (HttpClientErrorException e) {
+            if(e.getStatusCode().value() == 404) {
+                throw new NotFoundException();
+            }
             LOG.error("Error during retrieving ean {}", ean, e);
+            throw e;
+        } catch (ResourceAccessException e) {
+            if(e.getCause() instanceof SocketTimeoutException) {
+                throw new TimeoutException();
+            }
+            LOG.error("Error during retrieving ean {}", ean, e);
+            throw e;
         }
-        return null;
     }
 }

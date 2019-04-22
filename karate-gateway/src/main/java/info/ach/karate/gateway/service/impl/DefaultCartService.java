@@ -34,7 +34,7 @@ public class DefaultCartService implements ICartService {
     }
 
     @Override
-    public Cart addArticle(String cartUuid, String ean) {
+    public Cart addArticle(String cartUuid, String ean) throws Exception {
         Cart cart = carts.get(cartUuid);
         cart.getArticle().add(articleService.getArticle(ean));
         return cart;
