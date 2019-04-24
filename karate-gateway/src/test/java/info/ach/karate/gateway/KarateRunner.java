@@ -25,9 +25,9 @@ import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMoc
 import static org.junit.Assert.assertTrue;
 
 @CucumberOptions(tags = "~@ignore", features = {
-        // "classpath:info/ach/karate/gateway/usecaseone/cart_create.feature",
-        // "classpath:info/ach/karate/gateway/usecasetwo/cart_create.feature",
-        "classpath:info/ach/karate/gateway/usecasethree/cart_create.feature"
+        "classpath:info/ach/karate/gateway/usecaseone/cart_create.feature",
+        //"classpath:info/ach/karate/gateway/usecasetwo/cart_create.feature",
+        //"classpath:info/ach/karate/gateway/usecasethree/cart_create.feature"
 })
 public class KarateRunner {
 
@@ -38,21 +38,23 @@ public class KarateRunner {
 
     @Before
     public void setUp(){
+        /*
         wireMockServer = new WireMockServer(wireMockConfig().port(10000).notifier(new Slf4jNotifier(true)));
         wireMockServer.start();
 
         WireMock.configureFor("localhost", 10000);
 
         ArticleMockUtils.init();
+        */
     }
 
 
     @Test
     public void testParallel() {
         // with wiremock
-        context = SpringApplication.run(GatewayApplication.class, new String[]{"--server.port=18080", "--api.referentiel.url=http://localhost:10000/"});
+        // context = SpringApplication.run(GatewayApplication.class, new String[]{"--server.port=18080", "--api.referentiel.url=http://localhost:10000/"});
         // without wiremock
-        //context = SpringApplication.run(GatewayApplication.class, new String[]{"--server.port=18080"});
+        context = SpringApplication.run(GatewayApplication.class, new String[]{"--server.port=18080"});
 
         String karateOutputPath = "target/surefire-reports";
         KarateStats stats = CucumberRunner.parallel(getClass(), 1, karateOutputPath);
